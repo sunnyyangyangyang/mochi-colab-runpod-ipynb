@@ -1,0 +1,660 @@
+{
+  "last_node_id": 22,
+  "last_link_id": 35,
+  "nodes": [
+    {
+      "id": 12,
+      "type": "Note",
+      "pos": {
+        "0": 1349,
+        "1": -156
+      },
+      "size": {
+        "0": 365.5867919921875,
+        "1": 208.3488311767578
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note: WIP!",
+      "properties": {},
+      "widgets_values": [
+        "VAE decoding is extremely heavy so tiling is necessary, I have not found best settings for it yet so testing help is appreciated, you can keep decoding after sampling as the latents are still in memory to see what works.\n\nYou can also save the latents to disk and decode separately.\n\nIncrease the number of tiles until it fits your VRAM, and/or reduce per_batch to split the decoding time wise, this WILL cause frame skipping!\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 21,
+      "type": "MochiTorchCompileSettings",
+      "pos": {
+        "0": 96,
+        "1": 55
+      },
+      "size": {
+        "0": 352.79998779296875,
+        "1": 154
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "torch_compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "links": [
+            30
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiTorchCompileSettings"
+      },
+      "widgets_values": [
+        "inductor",
+        false,
+        "default",
+        true,
+        true
+      ]
+    },
+    {
+      "id": 8,
+      "type": "MochiTextEncode",
+      "pos": {
+        "0": 487,
+        "1": 563
+      },
+      "size": {
+        "0": 378.8630676269531,
+        "1": 183.64430236816406
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            35
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiTextEncode"
+      },
+      "widgets_values": [
+        "blurr, ugly, deformed body, extra limb, bad, terrible, disappearing arm and hand, unrealistic",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VHS_VideoCombine",
+      "pos": {
+        "0": 1785,
+        "1": 227
+      },
+      "size": [
+        1261.0787353515625,
+        1026.4973973688088
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 24
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "Mochi_preview",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "Mochi_preview_00004.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4",
+            "frame_rate": 24
+          },
+          "muted": false
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": "MochiTorchCompileSettings",
+      "pos": {
+        "0": 610,
+        "1": -206
+      },
+      "size": {
+        "0": 352.79998779296875,
+        "1": 154
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "torch_compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "links": [
+            32
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiTorchCompileSettings"
+      },
+      "widgets_values": [
+        "inductor",
+        false,
+        "default",
+        false,
+        true
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": {
+        "0": -41,
+        "1": 457
+      },
+      "size": {
+        "0": 479.53594970703125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            33
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl.safetensors",
+        "mochi"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "MochiModelLoader",
+      "pos": {
+        "0": 538,
+        "1": 45
+      },
+      "size": {
+        "0": 315,
+        "1": 150
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trigger",
+          "type": "CONDITIONING",
+          "link": 34,
+          "shape": 7
+        },
+        {
+          "name": "compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "link": 30,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mochi_model",
+          "type": "MOCHIMODEL",
+          "links": [
+            27
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiModelLoader"
+      },
+      "widgets_values": [
+        "transformers.safetensors",
+        "bf16",
+        "sage_attn",
+        false
+      ]
+    },
+    {
+      "id": 19,
+      "type": "MochiVAELoader",
+      "pos": {
+        "0": 979,
+        "1": 50
+      },
+      "size": {
+        "0": 355.20001220703125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "torch_compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "link": 32,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mochi_vae",
+          "type": "MOCHIVAE",
+          "links": [
+            28
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiVAELoader"
+      },
+      "widgets_values": [
+        "vae.safetensors",
+        "bf16"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "MochiTextEncode",
+      "pos": {
+        "0": 483,
+        "1": 281
+      },
+      "size": {
+        "0": 381.8630676269531,
+        "1": 227.23898315429688
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            17,
+            34
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiTextEncode"
+      },
+      "widgets_values": [
+        "This is a high-resolution  documentry featuring an beautiful Japanese idol model woman quickly swimming toward the left,she is in her early twenties, with a fair complexion and straight, shoulder-length dark brown hair with bangs. The photo is taken in the side back way. She is submerged up to her shoulders in a clear, turquoise swimming pool, which is illuminated by natural daylight, suggesting it's either morning or late afternoon. The woman is wearing a foam-fitting, shiny black latex bodysuit that clings to her slender physique, highlighting her curves. The suit has a high collar and long sleeves, providing a sleek, modern look. She is swimming while showing her breast and raising arm. Her expression is calm and inviting, with a gentle smile on her face. The water's surface is rippled, with small bubbles and droplets visible, adding a dynamic element to the scene. The overall mood of the image is serene and sensual, with a focus on the woman's smooth, glossy attire and the tranquil aquatic environment around her. 4k,8k video, sharp focus",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 15,
+      "type": "MochiDecodeSpatialTiling",
+      "pos": {
+        "0": 1340,
+        "1": 226
+      },
+      "size": {
+        "0": 390.5999755859375,
+        "1": 198
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "MOCHIVAE",
+          "link": 28
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiDecodeSpatialTiling"
+      },
+      "widgets_values": [
+        false,
+        2,
+        2,
+        16,
+        1,
+        6
+      ]
+    },
+    {
+      "id": 14,
+      "type": "MochiSampler",
+      "pos": {
+        "0": 960,
+        "1": 242
+      },
+      "size": {
+        "0": 315,
+        "1": 514
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MOCHIMODEL",
+          "link": 27
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 17
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "opt_sigmas",
+          "type": "SIGMAS",
+          "link": 29,
+          "shape": 7
+        },
+        {
+          "name": "cfg_schedule",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "cfg_schedule"
+          },
+          "shape": 7
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiSampler"
+      },
+      "widgets_values": [
+        848,
+        480,
+        55,
+        70,
+        4.5,
+        42,
+        "increment",
+        0
+      ]
+    },
+    {
+      "id": 20,
+      "type": "MochiSigmaSchedule",
+      "pos": {
+        "0": 1354,
+        "1": 526
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": [
+            29
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiSigmaSchedule"
+      },
+      "widgets_values": [
+        60,
+        0.025,
+        30,
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      17,
+      1,
+      0,
+      14,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      8,
+      0,
+      14,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      22,
+      14,
+      0,
+      15,
+      1,
+      "LATENT"
+    ],
+    [
+      24,
+      15,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      18,
+      0,
+      14,
+      0,
+      "MOCHIMODEL"
+    ],
+    [
+      28,
+      19,
+      0,
+      15,
+      0,
+      "MOCHIVAE"
+    ],
+    [
+      29,
+      20,
+      0,
+      14,
+      3,
+      "SIGMAS"
+    ],
+    [
+      30,
+      21,
+      0,
+      18,
+      1,
+      "MOCHICOMPILEARGS"
+    ],
+    [
+      32,
+      22,
+      0,
+      19,
+      0,
+      "MOCHICOMPILEARGS"
+    ],
+    [
+      33,
+      2,
+      0,
+      8,
+      0,
+      "CLIP"
+    ],
+    [
+      34,
+      1,
+      0,
+      18,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      35,
+      8,
+      1,
+      1,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1,
+      "offset": [
+        -546.7606437130303,
+        -306.7892400557427
+      ]
+    }
+  },
+  "version": 0.4
+}
