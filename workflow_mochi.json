@@ -1,6 +1,6 @@
 {
-  "last_node_id": 22,
-  "last_link_id": 35,
+  "last_node_id": 23,
+  "last_link_id": 36,
   "nodes": [
     {
       "id": 12,
@@ -35,7 +35,7 @@
       },
       "size": {
         "0": 352.79998779296875,
-        "1": 154
+        "1": 178
       },
       "flags": {},
       "order": 1,
@@ -59,7 +59,8 @@
         false,
         "default",
         true,
-        true
+        true,
+        false
       ]
     },
     {
@@ -74,7 +75,7 @@
         "1": 183.64430236816406
       },
       "flags": {},
-      "order": 6,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -119,10 +120,10 @@
       },
       "size": [
         1261.0787353515625,
-        1026.4973973688088
+        310
       ],
       "flags": {},
-      "order": 11,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
@@ -173,7 +174,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "Mochi_preview_00004.mp4",
+            "filename": "Mochi_preview_00008.mp4",
             "subfolder": "",
             "type": "temp",
             "format": "video/h264-mp4",
@@ -192,7 +193,7 @@
       },
       "size": {
         "0": 352.79998779296875,
-        "1": 154
+        "1": 178
       },
       "flags": {},
       "order": 2,
@@ -216,7 +217,8 @@
         false,
         "default",
         false,
-        true
+        true,
+        false
       ]
     },
     {
@@ -261,10 +263,10 @@
       },
       "size": {
         "0": 315,
-        "1": 150
+        "1": 174
       },
       "flags": {},
-      "order": 8,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -297,7 +299,8 @@
         "transformers.safetensors",
         "bf16",
         "sage_attn",
-        false
+        false,
+        "default"
       ]
     },
     {
@@ -312,7 +315,7 @@
         "1": 82
       },
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -341,53 +344,6 @@
       ]
     },
     {
-      "id": 1,
-      "type": "MochiTextEncode",
-      "pos": {
-        "0": 483,
-        "1": 281
-      },
-      "size": {
-        "0": 381.8630676269531,
-        "1": 227.23898315429688
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 35
-        }
-      ],
-      "outputs": [
-        {
-          "name": "conditioning",
-          "type": "CONDITIONING",
-          "links": [
-            17,
-            34
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "links": [],
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "MochiTextEncode"
-      },
-      "widgets_values": [
-        "This is a high-resolution  documentry featuring an beautiful Japanese idol model woman quickly swimming toward the left,she is in her early twenties, with a fair complexion and straight, shoulder-length dark brown hair with bangs. The photo is taken in the side back way. She is submerged up to her shoulders in a clear, turquoise swimming pool, which is illuminated by natural daylight, suggesting it's either morning or late afternoon. The woman is wearing a foam-fitting, shiny black latex bodysuit that clings to her slender physique, highlighting her curves. The suit has a high collar and long sleeves, providing a sleek, modern look. She is swimming while showing her breast and raising arm. Her expression is calm and inviting, with a gentle smile on her face. The water's surface is rippled, with small bubbles and droplets visible, adding a dynamic element to the scene. The overall mood of the image is serene and sensual, with a focus on the woman's smooth, glossy attire and the tranquil aquatic environment around her. 4k,8k video, sharp focus",
-        1,
-        false
-      ]
-    },
-    {
       "id": 15,
       "type": "MochiDecodeSpatialTiling",
       "pos": {
@@ -396,10 +352,10 @@
       },
       "size": {
         "0": 390.5999755859375,
-        "1": 198
+        "1": 222
       },
       "flags": {},
-      "order": 10,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
@@ -432,7 +388,125 @@
         2,
         16,
         1,
-        6
+        6,
+        true
+      ]
+    },
+    {
+      "id": 20,
+      "type": "MochiSigmaSchedule",
+      "pos": {
+        "0": 1354,
+        "1": 526
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": [
+            29
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiSigmaSchedule"
+      },
+      "widgets_values": [
+        100,
+        0.025,
+        50,
+        1
+      ]
+    },
+    {
+      "id": 1,
+      "type": "MochiTextEncode",
+      "pos": {
+        "0": 483,
+        "1": 281
+      },
+      "size": {
+        "0": 381.8630676269531,
+        "1": 227.23898315429688
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            17,
+            34
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiTextEncode"
+      },
+      "widgets_values": [
+        "4k,8k video.This is a high-resolution  documentry featuring an beautiful Japanese idol model woman quickly swimming toward the left on bed,she is in her early twenties, with a fair complexion and straight, shoulder-length dark brown hair with bangs. The photo is taken in the side back way. The woman is wearing a foam-fitting, shiny black latex bodysuit that clings to her slender physique, highlighting her curves. The suit has a high collar and long sleeves, providing a sleek, modern look. She is swimming while showing her breast and raising arm. Her expression is calm and inviting, with a gentle smile on her face.  The overall mood of the image is serene and sensual, with a focus on the woman's smooth, glossy attire and the tranquil aquatic environment around her. 4k,8k video",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 23,
+      "type": "MochiFasterCache",
+      "pos": {
+        "0": 1355,
+        "1": 733
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "fastercache",
+          "type": "FASTERCACHEARGS",
+          "links": [
+            36
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MochiFasterCache"
+      },
+      "widgets_values": [
+        10,
+        22,
+        28,
+        "main_device"
       ]
     },
     {
@@ -447,7 +521,7 @@
         "1": 514
       },
       "flags": {},
-      "order": 9,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -481,6 +555,12 @@
           "shape": 7
         },
         {
+          "name": "fastercache",
+          "type": "FASTERCACHEARGS",
+          "link": 36,
+          "shape": 7
+        },
+        {
           "name": "samples",
           "type": "LATENT",
           "link": null,
@@ -504,46 +584,11 @@
         848,
         480,
         55,
-        70,
+        100,
         4.5,
-        42,
+        47,
         "increment",
         0
-      ]
-    },
-    {
-      "id": 20,
-      "type": "MochiSigmaSchedule",
-      "pos": {
-        "0": 1354,
-        "1": 526
-      },
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "sigmas",
-          "type": "SIGMAS",
-          "links": [
-            29
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "MochiSigmaSchedule"
-      },
-      "widgets_values": [
-        60,
-        0.025,
-        30,
-        1
       ]
     }
   ],
@@ -643,16 +688,24 @@
       1,
       0,
       "CLIP"
+    ],
+    [
+      36,
+      23,
+      0,
+      14,
+      5,
+      "FASTERCACHEARGS"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.1,
+      "scale": 0.6830134553650705,
       "offset": [
-        -546.7606437130303,
-        -306.7892400557427
+        252.4433271995577,
+        16.317504046175902
       ]
     }
   },
